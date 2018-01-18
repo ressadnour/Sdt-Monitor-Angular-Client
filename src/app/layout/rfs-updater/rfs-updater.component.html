@@ -1,0 +1,72 @@
+<div [@routerTransition]>
+  <div class="row">
+      <div class="col col-sm-9">
+              <div class="card mb-3">
+                  <div class="card-header">
+                      Bar Chart
+                  </div>
+                  <div class="card-block">
+                       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas> 
+                  </div>
+                  <div class="card-footer">
+                      <button class="btn btn-info btn-sm" (click)="randomize()">Update</button>
+                  </div>
+              </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-3">
+      <app-stat  [bgClass]="'card-primary'" [icon]="'fa-arrow-circle-up'" [count]="rfsUpdaterService.lastRefresh" [label]="rfsUpdaterService.name" ></app-stat>
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="col col-lg-12">
+       <div class="card mb-3">
+            <div class="card-header">
+                <h1>Web Services</h1>
+            </div>
+              <div class="card-block table-responsive">
+                    <data-table class="table table-sm" id="ws-rfs-updater-grid"
+                    headerTitle="{{rfsUpdaterService.lastRefreshDate}} ({{webMethodItemCount}})"
+                    [items]="webMethodItems"
+                    [itemCount]="webMethodItemCount"
+                    (reload)="reloadwebMethodsItems($event)"
+                    >
+                    <data-table-column
+                        [property]="'Name'"
+                        [header]="'Name'"
+                        [sortable]="true"
+                        [resizable]="true">
+                    </data-table-column>
+
+                    <data-table-column
+                        [property]="'Status'"
+                        [header]="'Status'"
+                        [sortable]="true"
+                        [resizable]="true">
+                    </data-table-column>
+                   
+                    <data-table-column
+                    [property]="'LastAccess'"
+                    [header]="'Last access'"
+                    [sortable]="true">
+                     <template #dataTableCell let-item="item">
+                        <span>{{item.LastAccess | date:'hh:mm'}}</span>
+                    </template>
+                </data-table-column> 
+
+                    <data-table-column
+                        [property]="'Description'"
+                        [header]="'Description'"
+                        [sortable]="true"
+                        [resizable]="true">
+                    </data-table-column>
+
+                    
+                </data-table>
+            </div>
+        </div> 
+    </div>
+</div>
+

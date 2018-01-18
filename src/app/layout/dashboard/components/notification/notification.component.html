@@ -1,0 +1,10 @@
+<div class="card-block">
+    <div class="list-group" *ngFor="let el of alerts">
+        <a href="#" class="list-group-item clearfix d-block">
+            <i class="fa fa-comment fa-fw"></i> {{el.title}}
+            <span class="float-right text-muted small"><em>{{el.date}}</em></span>
+        </a>
+    </div>
+    <!-- /.list-group -->
+    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+</div>

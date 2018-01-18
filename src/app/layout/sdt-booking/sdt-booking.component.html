@@ -1,0 +1,144 @@
+<!-- <app-spinner></app-spinner> -->
+<div [@routerTransition]>
+    <div class="row">
+            <div class="col col-sm-9">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Activity View
+                        </div>
+                         <div class="card-block">
+                             <canvas baseChart
+                                    [datasets]="barChartData" 
+                                    [labels]="barChartLabels" 
+                                    [options]="barChartOptions" 
+                                    [legend]="barChartLegend" 
+                                    [chartType]="barChartType" 
+                                    (chartHover)="chartHovered($event)" 
+                                    (chartClick)="chartClicked($event)">
+                        </canvas>  
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-info btn-sm" (click)="randomize()">Update</button>
+                        </div>
+                    </div>
+            </div>
+        <div class="col-xl-3 col-lg-3">
+            <app-stat [bgClass]="sdtBookingService.status" [icon]="'fa-arrow-circle-'+sdtBookingService.status" [count]="sdtBookingService.lastRefreshDate" [label]="sdtBookingService.name" [data]="sdtBookingService.status" [routingLink]="sdtBookingService.routingLink" ></app-stat>
+        </div>
+    </div>
+<div class="row">
+        <div class="col col-lg-12">
+           <div class="card mb-3">
+                <div class="card-header">
+                    <h1>Web Services</h1>
+                </div>
+                  <div class="card-block table-responsive">
+                        <data-table class="table table-sm" id="ws-grid"
+                        headerTitle="{{sdtBookingService.wsLastRefreshDate}} ({{webMethodItemCount}})"
+                        [items]="webMethodItems"
+                        [itemCount]="webMethodItemCount"
+                        (reload)="reloadwebMethodsItems($event)"
+                        >
+                        <data-table-column
+                            [property]="'Name'"
+                            [header]="'Name'"
+                            [sortable]="true"
+                            [resizable]="true">
+                        </data-table-column>
+
+                        <data-table-column
+                            [property]="'Status'"
+                            [header]="'Status'"
+                            [sortable]="true"
+                            [resizable]="true">
+                        </data-table-column>
+                       
+                        <data-table-column
+                        [property]="'LastAccess'"
+                        [header]="'Last access'"
+                        [sortable]="true">
+                         <template #dataTableCell let-item="item">
+                            <span>{{item.LastAccess | date:'hh:mm'}}</span>
+                        </template>
+                    </data-table-column> 
+
+                        <data-table-column
+                            [property]="'Description'"
+                            [header]="'Description'"
+                            [sortable]="true"
+                            [resizable]="true">
+                        </data-table-column>
+                    </data-table>
+                </div>
+            </div> 
+        </div>
+    </div> 
+    <button class="btn btn-info btn-sm" (click)="randomize()">Update</button>
+    <div class="row">
+        <div class="col col-lg-12">
+           <div class="card mb-3">
+                <div class="card-header">
+                    <h1>Log files</h1>
+                </div>
+                  <!-- <md-progress-bar *ngIf="logFilesItemCount === 0" color="primary"  mode="indeterminate"> </md-progress-bar> -->
+                  <div class="card-block table-responsive">
+                        <data-table class="table table-sm" id="logs-grid"
+                        headerTitle="{{sdtBookingService.lastRefreshDate}} ({{ logFilesItemCount }})"
+                        [items]="LogFilesItems"
+                        [itemCount]="logFilesItemCount"
+                        (reload)="reloadLogFilesItems($event)">
+                        <data-table-column
+                            [property]="'Name'"
+                            [header]="'File name'"
+                            [sortable]="true"
+                            [resizable]="true">
+                        </data-table-column>
+
+                         <data-table-column
+                            [property]="'Length'"
+                            [header]="'Size'"
+                            [sortable]="true"
+                            [width]="100"
+                            [resizable]="true">
+                        </data-table-column>
+
+                     <data-table-column
+                            [property]="'Directory'"
+                            [header]="'Directory'"
+                            [width]="100"
+                            [sortable]="true"
+                            [resizable]="true">
+                        </data-table-column>
+                         <data-table-column
+                            [property]="'Path'"
+                            [header]="'Path'"
+                            [sortable]="true"
+                            [resizable]="true">
+                        </data-table-column>
+                   
+                        <data-table-column
+                            [property]="'DateTimeGeneration'"
+                            [header]="'Date'"
+                            [sortable]="true">
+                            <template #dataTableCell let-item="item">
+                                <span>{{item.DateTimeGeneration | date:'yyyy-MM-dd'}}</span>
+                            </template>
+                        </data-table-column>
+                    
+                    <data-table-column
+                        [property]="'DateTimeGeneration'"
+                        [header]="'Time'"
+                        [sortable]="true">
+                        <template #dataTableCell let-item="item">
+                            <span>{{item.DateTimeGeneration | date:'hh:mm'}}</span>
+                        </template>
+                    </data-table-column>
+                    </data-table>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+    
+</div>
